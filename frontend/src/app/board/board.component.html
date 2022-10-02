@@ -1,0 +1,17 @@
+
+<div>
+    <div class="d-flex text-center m-auto justify-content-center align-center flex-column middle">
+        
+        <div class="d-inline-flex" *ngFor="let f of [].constructor(grid.length); let row = index">
+            <div class="grid-square border flex-fill  border-3 p-1" *ngFor="let m of [].constructor(grid[row].length); let column = index" (mouseover)="highlightColumn(column)" (mouseout)="unHighlightColumn(column)" (click)="placePiece(column)" [ngClass]="{'bg-info' : grid[row][column].isHighlighted}" >
+                <div class="grid-piece text-light h-100 w-100 rounded-circle" *ngIf="grid[row][column].squareSide!=0" [style.backgroundColor]="grid[row][column].squareSide>0 ? 'red' : 'orange'" [ngClass]="{'piecePlaced' : grid[row][column].squareSide != 0}">                    
+                </div>
+                
+            </div>
+        </div>
+        
+
+    </div>
+
+</div> 
+

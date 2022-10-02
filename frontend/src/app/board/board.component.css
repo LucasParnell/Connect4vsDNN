@@ -1,0 +1,45 @@
+
+.middle {
+    align-items: center;
+}
+
+
+
+.grid-square {
+    position: relative;
+    width: 13vw;
+    height: 13vw;
+    max-width: 100px;
+    max-height: 100px;
+    margin: auto;
+    user-select: none;
+}
+
+.columnHover{
+    background-color: blue;
+    animation: moveHover 0.3s;
+}
+
+.piecePlaced {
+    position: relative;
+    animation: bounce 0.3s;
+}
+
+
+@keyframes moveHover {
+    0%  { transform: scale(.9,1.1); }
+    50%  { transform: scale(1,1); }
+    100% { transform: scale(1,1);}
+}
+
+@keyframes bounce {
+    0%  { transform: scale(.9,1.1) translateY(-50px); }
+    50%  { transform: scale(1,1)    translateY(0); }
+    100% { transform: scale(1,1)    translateY(0); }
+}
+
+
+
+.grid-piece {
+    box-shadow: inset 0 0 0 6px #e78267;
+}
