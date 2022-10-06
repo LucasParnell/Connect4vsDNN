@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
 
   currentTurn = true;
   public playerSide = Math.floor(Math.random()*2)?-1:1;
-  lastMove: [number, number] = [0,0]
+  lastMove: number = 0;
   public gridUpdate : [number, number] = [0,0];
   public currentWin : number = 0;
   public initGrid : number[][] = [[],[],[],[],[],[]];

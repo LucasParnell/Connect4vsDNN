@@ -5,7 +5,7 @@ import numpy as np
 from scipy.signal import convolve2d
 
 GRID_SIZE = [6, 7]
-
+infinity = float('inf')
 
 class Game(object):
 
@@ -20,31 +20,41 @@ class Game(object):
         for row in range(GRID_SIZE[0]):
             for col in range(GRID_SIZE[1]):
                 self.grid[row].append(0)
-        print(self.grid)
 
-    def update(self, last):
-        self.grid[last[0]][last[1]] = -1
 
-        # Finds lowest point in chosen column
-        lowestPoint = GRID_SIZE[0]
-        aiSpot = [0, 0]
+    def update_only(self, last, player):
 
-        while lowestPoint == GRID_SIZE[0]:
-            column = 0 #random.randint(0, GRID_SIZE[1])
+        if last is not None:
+            lowestPoint = GRID_SIZE[0]
+
+            column = last
             for row in range(0, 6, 1):
-
                 if self.grid[row][column] == 0:
                     lowestPoint = row
                 else:
                     break
+            if lowestPoint == 6:
+                return
+            self.grid[lowestPoint][last] = player
+        else:
+            # Finds lowest point in chosen column
+            lowestPoint = GRID_SIZE[0]
+            aiSpot = [0, 0]
 
-            # TODO(Add Board Full Check)
+            while lowestPoint == GRID_SIZE[0]:
+                column = random.randint(0, GRID_SIZE[1] - 1)
+                for row in range(0, 6, 1):
 
-        aiSpot = [lowestPoint, column]
+                    if self.grid[row][column] == 0:
+                        lowestPoint = row
+                    else:
+                        break
 
-        self.grid[aiSpot[0]][aiSpot[1]] = 1
+                # TODO(Add Board Full Check)
 
-        return aiSpot
+            aiSpot = [lowestPoint, column]
+
+            self.grid[aiSpot[0]][aiSpot[1]] = player
 
     def checkWin(self, player):
         board = np.array(self.grid)
@@ -52,3 +62,6 @@ class Game(object):
             if (convolve2d(board == player, kernel, mode="valid") == 4).any():
                 return True
         return False
+
+
+

@@ -18,7 +18,7 @@ export class PostService {
     }
   
 
-  post_turn(uuid: string, lastMove: [number,number]):Observable<any>{
+  post_turn(uuid: string, lastMove: number):Observable<any>{
     return this.httpClient.post(
       this.url + "/gameTurn", {'uuid' : uuid, 'lastMove': lastMove});
     }

@@ -20,7 +20,6 @@ export class BoardComponent implements OnInit {
   @Input() initGrid : number[][] = [[],[],[],[],[],[]];
   @Input() playerSide : number = 1;
 
-  playerSide2 : number = 1;
   currentTurn : boolean = true;
   @Output() turnChanged = new EventEmitter<TurnData>();
 
@@ -63,13 +62,14 @@ export class BoardComponent implements OnInit {
 
           let turnData = new TurnData();
           turnData.currentTurn = this.currentTurn
-          turnData.lastMove = [lowestPoint, column]
+          turnData.lastMove = column
           turnData.playerSide = this.playerSide
 
           this.grid[lowestPoint][column].squareSide = this.playerSide;
           this.pieceSound();
           this.currentTurn = false;
           this.turnChanged.emit(turnData);
+          console.log(this.grid)
         }
       }
     }
@@ -122,10 +122,6 @@ export class BoardComponent implements OnInit {
     let l_initGrid = changes['initGrid']
     let l_gridUpdate = changes['gridUpdate']
 
-
-    if(changes["playerSide"]){
-      this.playerSide2 = changes["playerSide"].currentValue
-    }
 
     console.log(changes)
 
@@ -190,5 +186,5 @@ class GridSquare {
 export class TurnData {
   playerSide = 0
   currentTurn = false
-  lastMove: [number, number] = [0,0]
+  lastMove: number = 0
 }
